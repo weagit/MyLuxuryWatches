@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:MyApp.ViewModel"
+             xmlns:model="clr-namespace:MyApp.Model"
+             x:Class="MyApp.View.MainView"
+             x:DataType="viewmodel:MainViewModel"
+             Title=""
+             BackgroundImageSource="img_background.jpg">
+
+    <!-- Styles -->
+    <ContentPage.Resources>
+        <Style x:Key="LuxuryTitleStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="34" />
+            <Setter Property="TextColor" Value="#000000" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="Margin" Value="0,20,0,10" />
+            <Setter Property="FontFamily" Value="Trajan Pro, Didot, Times New Roman" />
+            <Setter Property="CharacterSpacing" Value="1.5" />
+        </Style>
+
+        <Style x:Key="TitleShadowStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="34" />
+            <Setter Property="TextColor" Value="#996B00" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="Margin" Value="2,22,0,10" />
+            <Setter Property="FontFamily" Value="Trajan Pro, Didot, Times New Roman" />
+            <Setter Property="CharacterSpacing" Value="1.5" />
+            <Setter Property="Opacity" Value="0.7" />
+        </Style>
+
+        <Style x:Key="LuxuryButtonStyle" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#000000" />
+            <Setter Property="TextColor" Value="#FFD700" />
+            <Setter Property="CornerRadius" Value="20" />
+            <Setter Property="WidthRequest" Value="150" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="BorderColor" Value="#FFD700" />
+            <Setter Property="BorderWidth" Value="2" />
+        </Style>
+
+        <Style x:Key="LuxuryBorderStyle" TargetType="Border">
+            <Setter Property="StrokeThickness" Value="2" />
+            <Setter Property="StrokeShape">
+                <Setter.Value>
+                    <RoundRectangle CornerRadius="12" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Padding" Value="10" />
+            <Setter Property="Stroke" Value="#FFD700" />
+            <Setter Property="BackgroundColor" Value="#AA000000" />
+        </Style>
+
+        <Style x:Key="LuxuryLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="TextColor" Value="#FFD700" />
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+    </ContentPage.Resources>
+
+    <!-- Layout global -->
+    <Grid Padding="10"
+          RowDefinitions="Auto,*"
+          ColumnDefinitions="Auto,*">
+
+        <!-- Version -->
+        <Label Text="v2.0"
+               Grid.Row="0"
+               Grid.Column="0"
+               TextColor="#FFD700"
+               FontSize="12"
+               HorizontalOptions="Start"
+               VerticalOptions="Start"
+               Margin="5,5,0,0"
+               Opacity="0.7" />
+
+        <!-- Titre avec effet -->
+        <Grid Grid.Row="0" Grid.ColumnSpan="2">
+            <Label Text="LUXURY TIMEPIECE COLLECTION"
+                   Style="{StaticResource TitleShadowStyle}"
+                   HorizontalOptions="Center" />
+            <Label Text="LUXURY TIMEPIECE COLLECTION"
+                   Style="{StaticResource LuxuryTitleStyle}"
+                   HorizontalOptions="Center">
+                <Label.Shadow>
+                    <Shadow Brush="#FFD700" Offset="1,1" Radius="1" Opacity="0.8" />
+                </Label.Shadow>
+            </Label>
+            <BoxView HeightRequest="2"
+                     BackgroundColor="#FFD700"
+                     WidthRequest="280"
+                     HorizontalOptions="Center"
+                     VerticalOptions="End"
+                     Margin="0,0,0,5" />
+        </Grid>
+
+        <!-- Colonne gauche : boutons -->
+        <VerticalStackLayout Grid.Row="1"
+                             Grid.Column="0"
+                             Padding="10"
+                             Spacing="10"
+                             VerticalOptions="Start">
+            <Button Text="Add Watch"
+                    Style="{StaticResource LuxuryButtonStyle}"
+                    Command="{Binding GoToAddWatchCommand}"
+                    IsEnabled="{Binding IsNotBusy}"
+                    IsVisible="{Binding IsUserAdmin}" />
+            <Button Text="Scanner"
+                    Style="{StaticResource LuxuryButtonStyle}"
+                    Command="{Binding ScanObjectCommand}"
+                    IsEnabled="{Binding IsNotBusy}"
+                    IsVisible="{Binding IsUserAdmin}" />
+            <Button Text="Export CSV"
+                    Style="{StaticResource LuxuryButtonStyle}"
+                    Command="{Binding ExportToCSVCommand}"
+                    IsEnabled="{Binding IsNotBusy}"
+                    IsVisible="{Binding IsUserAdmin}" />
+            <Button Text="Import CSV"
+                    Style="{StaticResource LuxuryButtonStyle}"
+                    Command="{Binding ImportFromCSVCommand}"
+                    IsEnabled="{Binding IsNotBusy}"
+                    IsVisible="{Binding IsUserAdmin}" />
+            <Button Text="Brand Stats"
+                    Style="{StaticResource LuxuryButtonStyle}"
+                    Command="{Binding GoToStatsCommand}"
+                    IsEnabled="{Binding IsNotBusy}"
+                    IsVisible="{Binding IsUserLoggedIn}" />
+            <Button Text="Users"
+                    Style="{StaticResource LuxuryButtonStyle}"
+                    Command="{Binding GoToUsersCommand}"
+                    IsEnabled="{Binding IsNotBusy}"
+                    IsVisible="{Binding IsUserAdmin}" />
+            <Button Text="Login/Logout"
+                    Style="{StaticResource LuxuryButtonStyle}"
+                    Command="{Binding LogoutCommand}"
+                    IsEnabled="{Binding IsNotBusy}" />
+        </VerticalStackLayout>
+
+        <!-- Colonne droite : collection de montres -->
+        <ScrollView Grid.Row="1"
+                    Grid.Column="1"
+                    Padding="10">
+            <CollectionView ItemsSource="{Binding MyObservableList}"
+                            SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     Span="2"
+                                     HorizontalItemSpacing="10"
+                                     VerticalItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="model:Watch">
+                        <Border Style="{StaticResource LuxuryBorderStyle}">
+                            <Grid HeightRequest="120"
+                                  ColumnDefinitions="0.5*,*">
+
+                                <!-- Image de la montre -->
+                                <ImageButton Grid.Column="0"
+                                             Source="{Binding Picture}"
+                                             HeightRequest="100"
+                                             Aspect="AspectFit"
+                                             HorizontalOptions="Center"
+                                             Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=GoToDetailsCommand}"
+                                             CommandParameter="{Binding Id}"
+                                             IsEnabled="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=IsNotBusy}" />
+
+                                <!-- Informations + appréciation -->
+                                <VerticalStackLayout Grid.Column="1"
+                                                     Padding="10,0"
+                                                     Spacing="5">
+                                    <Label Text="{Binding Brand, StringFormat='Brand: {0}'}"
+                                           Style="{StaticResource LuxuryLabelStyle}"
+                                           FontAttributes="Bold" />
+                                    <Label Text="{Binding Model, StringFormat='Model: {0}'}"
+                                           Style="{StaticResource LuxuryLabelStyle}" />
+                                    <Label Text="{Binding Price, StringFormat='Price: {0:C}'}"
+                                           Style="{StaticResource LuxuryLabelStyle}" />
+
+                                    <!-- Étoiles affichées uniquement si connecté -->
+                                    <HorizontalStackLayout Spacing="3"
+                                                           HorizontalOptions="Start"
+                                                           VerticalOptions="Center"
+                                                           IsVisible="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=IsUserLoggedIn}">
+
+                                        <ImageButton Source="{Binding Star1}"
+                                                     WidthRequest="20"
+                                                     HeightRequest="20"
+                                                     BackgroundColor="Transparent"
+                                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=RateWatchCommand}"
+                                                     CommandParameter="{Binding Id, StringFormat='{}{0}|1'}" />
+                                        <ImageButton Source="{Binding Star2}"
+                                                     WidthRequest="20"
+                                                     HeightRequest="20"
+                                                     BackgroundColor="Transparent"
+                                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=RateWatchCommand}"
+                                                     CommandParameter="{Binding Id, StringFormat='{}{0}|2'}" />
+                                        <ImageButton Source="{Binding Star3}"
+                                                     WidthRequest="20"
+                                                     HeightRequest="20"
+                                                     BackgroundColor="Transparent"
+                                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=RateWatchCommand}"
+                                                     CommandParameter="{Binding Id, StringFormat='{}{0}|3'}" />
+                                        <ImageButton Source="{Binding Star4}"
+                                                     WidthRequest="20"
+                                                     HeightRequest="20"
+                                                     BackgroundColor="Transparent"
+                                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=RateWatchCommand}"
+                                                     CommandParameter="{Binding Id, StringFormat='{}{0}|4'}" />
+                                        <ImageButton Source="{Binding Star5}"
+                                                     WidthRequest="20"
+                                                     HeightRequest="20"
+                                                     BackgroundColor="Transparent"
+                                                     Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=RateWatchCommand}"
+                                                     CommandParameter="{Binding Id, StringFormat='{}{0}|5'}" />
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+    </Grid>
+</ContentPage>

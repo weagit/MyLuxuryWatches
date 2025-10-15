@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:MyApp.ViewModel"
+             xmlns:microcharts="clr-namespace:Microcharts.Maui;assembly=Microcharts.Maui"
+             x:Class="MyApp.View.StatsView"
+             x:DataType="viewmodel:StatsViewModel"
+             Title=""
+             BackgroundImageSource="img_background.jpg">
+
+    <ContentPage.Resources>
+        <!-- Styles pour un look luxueux et cohérent -->
+        <Style x:Key="HeaderLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="36"/>
+            <Setter Property="TextColor" Value="#FFD700"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
+        </Style>
+
+        <Style x:Key="MetricValueStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="#FFD700"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="MetricLabelStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="#FFFFFF"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <!-- Overlay pour assombrir légèrement l'arrière-plan et améliorer la lisibilité -->
+    <Grid>
+        <BoxView Color="#30000000" 
+                 HorizontalOptions="Fill" 
+                 VerticalOptions="Fill"/>
+
+        <ScrollView>
+            <Grid Padding="20" 
+                  RowDefinitions="Auto,Auto,*">
+
+                <!-- Header -->
+                <Label Grid.Row="0" 
+                       Text="WATCH COLLECTION STATISTICS" 
+                       Style="{StaticResource HeaderLabelStyle}">
+                    <Label.Shadow>
+                        <Shadow Brush="#80000000" 
+                                Offset="3,3" 
+                                Radius="10"/>
+                    </Label.Shadow>
+                </Label>
+
+                <!-- Key Metrics Dashboard -->
+                <Grid Grid.Row="1"
+                      ColumnDefinitions="*,*,*,*"
+                      ColumnSpacing="15"
+                      Margin="0,0,0,20">
+
+                    <!-- Total Value -->
+                    <Border Grid.Column="0"
+                            Stroke="#FFD700"
+                            StrokeThickness="1.5"
+                            BackgroundColor="#90000000"
+                            StrokeShape="RoundRectangle 15"
+                            Padding="10">
+                        <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label Text="£" 
+                                   Style="{StaticResource MetricValueStyle}" 
+                                   HorizontalOptions="Center"/>
+                            <Label Text="{Binding TotalCollectionValue, StringFormat='{0:N0}'}" 
+                                   Style="{StaticResource MetricValueStyle}"/>
+                            <Label Text="Total Value" 
+                                   Style="{StaticResource MetricLabelStyle}" 
+                                   Margin="0,5,0,0"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Watch Count -->
+                    <Border Grid.Column="1"
+                            Stroke="#FFD700"
+                            StrokeThickness="1.5"
+                            BackgroundColor="#90000000"
+                            StrokeShape="RoundRectangle 15"
+                            Padding="10">
+                        <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label Text="{Binding TotalWatchCount}" 
+                                   Style="{StaticResource MetricValueStyle}"/>
+                            <Label Text="Watches" 
+                                   Style="{StaticResource MetricLabelStyle}" 
+                                   Margin="0,5,0,0"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Average Value -->
+                    <Border Grid.Column="2"
+                            Stroke="#FFD700"
+                            StrokeThickness="1.5"
+                            BackgroundColor="#90000000"
+                            StrokeShape="RoundRectangle 15"
+                            Padding="10">
+                        <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label Text="£" 
+                                   Style="{StaticResource MetricValueStyle}" 
+                                   HorizontalOptions="Center"/>
+                            <Label Text="{Binding AverageWatchValue, StringFormat='{0:N0}'}" 
+                                   Style="{StaticResource MetricValueStyle}"/>
+                            <Label Text="Average Value" 
+                                   Style="{StaticResource MetricLabelStyle}" 
+                                   Margin="0,5,0,0"/>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <!-- Most Valuable Brand -->
+                    <Border Grid.Column="3"
+                            Stroke="#FFD700"
+                            StrokeThickness="1.5"
+                            BackgroundColor="#90000000"
+                            StrokeShape="RoundRectangle 15"
+                            Padding="10">
+                        <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label Text="{Binding MostValuableBrand}" 
+                                   Style="{StaticResource MetricValueStyle}"
+                                   TextColor="#FFD700"
+                                   FontSize="20"
+                                   LineBreakMode="WordWrap"
+                                   MaxLines="2"/>
+                            <Label Text="Top Brand" 
+                                   Style="{StaticResource MetricLabelStyle}" 
+                                   Margin="0,5,0,0"/>
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+
+                <!-- Centered Chart Section -->
+                <Border Grid.Row="2"
+                        Stroke="#FFD700"
+                        StrokeThickness="2"
+                        BackgroundColor="#90000000"
+                        StrokeShape="RoundRectangle 15"
+                        Padding="15"
+                        HorizontalOptions="Fill">
+                    <VerticalStackLayout>
+                        <Label Text="Brand Value Distribution" 
+                               TextColor="#FFD700"
+                               FontSize="22"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"
+                               Margin="0,0,0,15"/>
+
+                        <microcharts:ChartView 
+                            x:Name="BrandChart"
+                            Chart="{Binding BrandChart}"
+                            HeightRequest="350"
+                            HorizontalOptions="Fill"/>
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+        </ScrollView>
+    </Grid>
+</ContentPage>

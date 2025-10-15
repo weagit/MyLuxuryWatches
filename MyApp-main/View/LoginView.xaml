@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:MyApp.ViewModel"
+             x:Class="MyApp.View.LoginView"
+             x:DataType="viewmodel:LoginViewModel"
+             Title=""
+             BackgroundImageSource="img_background.jpg">
+
+    <ContentPage.Resources>
+        <!-- Style pour les titres -->
+        <Style x:Key="LuxuryTitleStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="34"/>
+            <Setter Property="TextColor" Value="#000000"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="Margin" Value="0,20,0,10"/>
+            <Setter Property="FontFamily" Value="Trajan Pro, Didot, Times New Roman"/>
+            <Setter Property="CharacterSpacing" Value="1.5"/>
+        </Style>
+
+        <!-- Style pour les boutons -->
+        <Style x:Key="LuxuryButtonStyle" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#000000" />
+            <Setter Property="TextColor" Value="#FFD700" />
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderColor" Value="#FFD700"/>
+            <Setter Property="BorderWidth" Value="2"/>
+        </Style>
+
+        <!-- Style pour les bordures -->
+        <Style x:Key="LuxuryBorderStyle" TargetType="Border">
+            <Setter Property="StrokeThickness" Value="2"/>
+            <Setter Property="StrokeShape">
+                <Setter.Value>
+                    <RoundRectangle CornerRadius="12"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Stroke" Value="#FFD700"/>
+            <Setter Property="BackgroundColor" Value="#AA000000"/>
+        </Style>
+
+        <!-- Style pour les labels -->
+        <Style x:Key="LuxuryLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="TextColor" Value="#FFD700"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+        </Style>
+
+        <!-- Style pour les entry -->
+        <Style x:Key="LuxuryEntryStyle" TargetType="Entry">
+            <Setter Property="BackgroundColor" Value="#33FFFFFF"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="PlaceholderColor" Value="#AAFFD700"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        <!-- Titre -->
+        <Label Grid.Row="0" Text="LUXURY TIMEPIECE COLLECTION" Style="{StaticResource LuxuryTitleStyle}">
+            <Label.Shadow>
+                <Shadow Brush="#FFD700" Offset="1,1" Radius="1" Opacity="0.8"/>
+            </Label.Shadow>
+        </Label>
+
+        <!-- Formulaire de connexion -->
+        <Border Grid.Row="1" Style="{StaticResource LuxuryBorderStyle}" Margin="20" WidthRequest="300" HorizontalOptions="Center">
+            <Grid RowDefinitions="Auto,*">
+                <Label Text="LOGIN" Grid.Row="0" Style="{StaticResource LuxuryLabelStyle}" 
+                       FontSize="22" HorizontalOptions="Center" Margin="0,0,0,20"/>
+
+                <VerticalStackLayout Grid.Row="1" Spacing="15">
+                    <Label Text="Username" Style="{StaticResource LuxuryLabelStyle}"/>
+                    <Entry Text="{Binding Username}" Style="{StaticResource LuxuryEntryStyle}" Placeholder="Username"/>
+
+                    <Label Text="Password" Style="{StaticResource LuxuryLabelStyle}"/>
+                    <Entry Text="{Binding Password}" Style="{StaticResource LuxuryEntryStyle}" Placeholder="Password" IsPassword="True"/>
+
+                    <Button Text="Log in" 
+                            Command="{Binding LoginCommand}" 
+                            Style="{StaticResource LuxuryButtonStyle}" 
+                            HorizontalOptions="Center"
+                            WidthRequest="150"
+                            Margin="0,20,0,0"/>
+                </VerticalStackLayout>
+            </Grid>
+        </Border>
+
+        <!-- Bouton Inscription -->
+        <Button Grid.Row="2" 
+                Text="Create account" 
+                Command="{Binding RegisterCommand}" 
+                Style="{StaticResource LuxuryButtonStyle}"
+                HorizontalOptions="Center"
+                WidthRequest="200"
+                Margin="0,0,0,30"/>
+    </Grid>
+</ContentPage>

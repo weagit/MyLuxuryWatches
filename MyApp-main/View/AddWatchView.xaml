@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodel="clr-namespace:MyApp.ViewModel"
+    x:Class="MyApp.View.AddWatchView"
+    x:DataType="viewmodel:AddWatchViewModel"
+    Title=""
+    BackgroundImageSource="img_background.jpg">
+
+    <ContentPage.Resources>
+        <!-- Style for titles -->
+        <Style x:Key="LuxuryTitleStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="34"/>
+            <Setter Property="TextColor" Value="#000000"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="Margin" Value="0,20,0,10"/>
+            <Setter Property="FontFamily" Value="Trajan Pro, Didot, Times New Roman"/>
+            <Setter Property="CharacterSpacing" Value="1.5"/>
+        </Style>
+
+        <!-- Style for labels -->
+        <Style x:Key="LuxuryLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="TextColor" Value="#FFD700"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="Margin" Value="0,5,0,0"/>
+        </Style>
+
+        <!-- Style for entries -->
+        <Style x:Key="LuxuryEntryStyle" TargetType="Entry">
+            <Setter Property="BackgroundColor" Value="#33FFFFFF"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="PlaceholderColor" Value="#AAFFD700"/>
+            <Setter Property="HeightRequest" Value="40"/>
+            <Setter Property="WidthRequest" Value="200"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+        </Style>
+
+        <!-- Style for buttons -->
+        <Style x:Key="LuxuryButtonStyle" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#000000" />
+            <Setter Property="TextColor" Value="#FFD700" />
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="Margin" Value="0,10,0,0"/>
+            <Setter Property="BorderColor" Value="#FFD700"/>
+            <Setter Property="BorderWidth" Value="2"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="WidthRequest" Value="150"/>
+        </Style>
+
+        <!-- Style for borders -->
+        <Style x:Key="LuxuryBorderStyle" TargetType="Border">
+            <Setter Property="StrokeThickness" Value="2"/>
+            <Setter Property="StrokeShape">
+                <Setter.Value>
+                    <RoundRectangle CornerRadius="12"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="Stroke" Value="#FFD700"/>
+            <Setter Property="BackgroundColor" Value="#AA000000"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*">
+        <!-- Page Title with shadow effect, matching LoginView style -->
+        <Label Grid.Row="0" Text="LUXURY TIMEPIECE COLLECTION" Style="{StaticResource LuxuryTitleStyle}">
+            <Label.Shadow>
+                <Shadow Brush="#FFD700" Offset="1,1" Radius="1" Opacity="0.8"/>
+            </Label.Shadow>
+        </Label>
+
+        <ScrollView Grid.Row="1">
+            <Border Style="{StaticResource LuxuryBorderStyle}" Margin="20" HorizontalOptions="Center">
+                <Grid Padding="20" 
+                      RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                      RowSpacing="10">
+
+                    <!-- Form Title -->
+                    <Label Grid.Row="0"
+                           Text="ADD NEW WATCH" 
+                           FontSize="24"
+                           TextColor="#FFD700"
+                           HorizontalOptions="Center"
+                           FontAttributes="Bold"
+                           Margin="0,0,0,20">
+                    </Label>
+
+                    <!-- ID -->
+                    <Grid Grid.Row="1" ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                        <Label Grid.Column="0" 
+                               Text="Watch ID" 
+                               Style="{StaticResource LuxuryLabelStyle}" 
+                               VerticalOptions="Center"/>
+                        <Entry Grid.Column="1" 
+                               Text="{Binding Id}" 
+                               Style="{StaticResource LuxuryEntryStyle}"/>
+                    </Grid>
+
+                    <!-- BRAND -->
+                    <Grid Grid.Row="2" ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                        <Label Grid.Column="0" 
+                               Text="Brand" 
+                               Style="{StaticResource LuxuryLabelStyle}" 
+                               VerticalOptions="Center"/>
+                        <Entry Grid.Column="1" 
+                               Text="{Binding Brand}" 
+                               Style="{StaticResource LuxuryEntryStyle}"/>
+                    </Grid>
+
+                    <!-- MODEL -->
+                    <Grid Grid.Row="3" ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                        <Label Grid.Column="0" 
+                               Text="Model" 
+                               Style="{StaticResource LuxuryLabelStyle}" 
+                               VerticalOptions="Center"/>
+                        <Entry Grid.Column="1" 
+                               Text="{Binding Model}" 
+                               Style="{StaticResource LuxuryEntryStyle}"/>
+                    </Grid>
+
+                    <!-- TYPE -->
+                    <Grid Grid.Row="4" ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                        <Label Grid.Column="0" 
+                               Text="Type" 
+                               Style="{StaticResource LuxuryLabelStyle}" 
+                               VerticalOptions="Center"/>
+                        <Entry Grid.Column="1" 
+                               Text="{Binding Type}" 
+                               Style="{StaticResource LuxuryEntryStyle}"/>
+                    </Grid>
+
+                    <!-- MATERIAL -->
+                    <Grid Grid.Row="5" ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                        <Label Grid.Column="0" 
+                               Text="Material" 
+                               Style="{StaticResource LuxuryLabelStyle}" 
+                               VerticalOptions="Center"/>
+                        <Entry Grid.Column="1" 
+                               Text="{Binding Material}" 
+                               Style="{StaticResource LuxuryEntryStyle}"/>
+                    </Grid>
+
+                    <!-- YEAR -->
+                    <Grid Grid.Row="6" ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                        <Label Grid.Column="0" 
+                               Text="Year" 
+                               Style="{StaticResource LuxuryLabelStyle}" 
+                               VerticalOptions="Center"/>
+                        <Entry Grid.Column="1" 
+                               Text="{Binding Year}" 
+                               Style="{StaticResource LuxuryEntryStyle}"/>
+                    </Grid>
+
+                    <!-- PRICE -->
+                    <Grid Grid.Row="7" ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                        <Label Grid.Column="0" 
+                               Text="Price" 
+                               Style="{StaticResource LuxuryLabelStyle}" 
+                               VerticalOptions="Center"/>
+                        <Entry Grid.Column="1" 
+                               Text="{Binding Price}" 
+                               Style="{StaticResource LuxuryEntryStyle}"/>
+                    </Grid>
+
+                    <!-- LIMITED EDITION -->
+                    <Grid Grid.Row="8" ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                        <Label Grid.Column="0" 
+                               Text="Is Limited Edition?" 
+                               Style="{StaticResource LuxuryLabelStyle}" 
+                               VerticalOptions="Center"/>
+                        <CheckBox Grid.Column="1" 
+                                  IsChecked="{Binding IsLimitedEdition}" 
+                                  VerticalOptions="Center"/>
+                    </Grid>
+
+                    <!-- PICTURE -->
+                    <Grid Grid.Row="9" ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                        <Label Grid.Column="0" 
+                               Text="Picture (file name)" 
+                               Style="{StaticResource LuxuryLabelStyle}" 
+                               VerticalOptions="Center"/>
+                        <Entry Grid.Column="1" 
+                               Text="{Binding Picture}" 
+                               Style="{StaticResource LuxuryEntryStyle}"/>
+                    </Grid>
+
+                    <!-- ADD BUTTON -->
+                    <Button Grid.Row="10"
+                            Text="Add Watch" 
+                            Command="{Binding AddWatchCommand}"
+                            Style="{StaticResource LuxuryButtonStyle}"
+                            Margin="0,20,0,0"/>
+                </Grid>
+            </Border>
+        </ScrollView>
+    </Grid>
+</ContentPage>

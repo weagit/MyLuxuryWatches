@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewmodel="clr-namespace:MyApp.ViewModel"
+    x:Class="MyApp.View.DetailsView"
+    x:DataType="viewmodel:DetailsViewModel"
+    Title=""
+    BackgroundImageSource="details_background.jpg">
+
+    <ContentPage.Resources>
+        <Style x:Key="LuxuryLabelStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="#FFD700"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="Margin" Value="0,5,0,0"/>
+        </Style>
+
+        <Style x:Key="LuxuryEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="#FFD700"/>
+            <Setter Property="BackgroundColor" Value="#80000000"/>
+            <Setter Property="FontAttributes" Value="None"/>
+            <Setter Property="HeightRequest" Value="40"/>
+            <Setter Property="Margin" Value="0,5,0,0"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+        </Style>
+
+        <Style x:Key="LuxuryButtonStyle" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#000000" />
+            <Setter Property="TextColor" Value="#FFD700" />
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="Margin" Value="0,10,0,0"/>
+            <Setter Property="BorderColor" Value="#FFD700"/>
+            <Setter Property="BorderWidth" Value="2"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="WidthRequest" Value="150"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <Grid Padding="20" 
+              ColumnDefinitions="*,*" 
+              ColumnSpacing="20" 
+              RowSpacing="20">
+
+            <!-- Colonne gauche : image -->
+            <Border Grid.Column="0" 
+                    Padding="10" 
+                    BackgroundColor="Transparent" 
+                    StrokeThickness="0" 
+                    VerticalOptions="Start">
+                <Image Source="{Binding Picture}"
+                       Aspect="AspectFit"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       HeightRequest="300"/>
+            </Border>
+
+            <!-- Colonne droite : formulaire -->
+            <Grid Grid.Column="1" 
+                  RowSpacing="15" 
+                  ColumnSpacing="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Id -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Brand -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Model -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Type -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Material -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Year -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Price -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Limited -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Picture -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Buttons -->
+                </Grid.RowDefinitions>
+
+                <!-- Id -->
+                <Label Grid.Row="0" Grid.Column="0" 
+                       Text="Id:" 
+                       Style="{StaticResource LuxuryLabelStyle}"/>
+                <Entry Grid.Row="0" Grid.Column="1" 
+                       Text="{Binding Id}" 
+                       Style="{StaticResource LuxuryEntryStyle}"/>
+
+                <!-- Brand -->
+                <Label Grid.Row="1" Grid.Column="0" 
+                       Text="Brand:" 
+                       Style="{StaticResource LuxuryLabelStyle}"/>
+                <Entry Grid.Row="1" Grid.Column="1" 
+                       Text="{Binding Brand}" 
+                       Style="{StaticResource LuxuryEntryStyle}"/>
+
+                <!-- Model -->
+                <Label Grid.Row="2" Grid.Column="0" 
+                       Text="Model:" 
+                       Style="{StaticResource LuxuryLabelStyle}"/>
+                <Entry Grid.Row="2" Grid.Column="1" 
+                       Text="{Binding Model}" 
+                       Style="{StaticResource LuxuryEntryStyle}"/>
+
+                <!-- Type -->
+                <Label Grid.Row="3" Grid.Column="0" 
+                       Text="Type:" 
+                       Style="{StaticResource LuxuryLabelStyle}"/>
+                <Entry Grid.Row="3" Grid.Column="1" 
+                       Text="{Binding Type}" 
+                       Style="{StaticResource LuxuryEntryStyle}"/>
+
+                <!-- Material -->
+                <Label Grid.Row="4" Grid.Column="0" 
+                       Text="Material:" 
+                       Style="{StaticResource LuxuryLabelStyle}"/>
+                <Entry Grid.Row="4" Grid.Column="1" 
+                       Text="{Binding Material}" 
+                       Style="{StaticResource LuxuryEntryStyle}"/>
+
+                <!-- Year -->
+                <Label Grid.Row="5" Grid.Column="0" 
+                       Text="Year:" 
+                       Style="{StaticResource LuxuryLabelStyle}"/>
+                <Entry Grid.Row="5" Grid.Column="1" 
+                       Text="{Binding Year}" 
+                       Style="{StaticResource LuxuryEntryStyle}"/>
+
+                <!-- Price -->
+                <Label Grid.Row="6" Grid.Column="0" 
+                       Text="Price:" 
+                       Style="{StaticResource LuxuryLabelStyle}"/>
+                <Entry Grid.Row="6" Grid.Column="1" 
+                       Text="{Binding Price}" 
+                       Style="{StaticResource LuxuryEntryStyle}"/>
+
+                <!-- Limited -->
+                <Label Grid.Row="7" Grid.Column="0" 
+                       Text="Limited?" 
+                       Style="{StaticResource LuxuryLabelStyle}"/>
+                <CheckBox Grid.Row="7" Grid.Column="1" 
+                          IsChecked="{Binding IsLimitedEdition}" 
+                          VerticalOptions="Center"/>
+
+                <!-- Picture -->
+                <Label Grid.Row="8" Grid.Column="0" 
+                       Text="Picture:" 
+                       Style="{StaticResource LuxuryLabelStyle}"/>
+                <Entry Grid.Row="8" Grid.Column="1" 
+                       Text="{Binding Picture}" 
+                       Style="{StaticResource LuxuryEntryStyle}"/>
+
+                <!-- Boutons côte à côte -->
+                <HorizontalStackLayout Grid.Row="9" Grid.ColumnSpan="2"
+                                       HorizontalOptions="Center"
+                                       Spacing="15"
+                                       Margin="0,10,0,0">
+
+                    <Button x:Name="MyAnimatedButton"
+                            Text="Submit"
+                            Style="{StaticResource LuxuryButtonStyle}"
+                            Command="{Binding ChangeObjectParametersCommand}"
+                            Clicked="MyAnimatedButton_Clicked"
+                            IsEnabled="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:BaseViewModel}}, Path=IsNotBusy}" />
+
+                    <Button Text="Delete"
+                            Style="{StaticResource LuxuryButtonStyle}"
+                            Command="{Binding DeleteWatchCommand}"
+                            IsEnabled="{Binding IsNotBusy}" />
+                </HorizontalStackLayout>
+            </Grid>
+        </Grid>
+    </ScrollView>
+</ContentPage>
